@@ -1,0 +1,46 @@
+This image classification model is used to classify whether the people showed in an image are happy or sad.
+
+part 1:
+1. First we install opencv (cv2)
+2. we download happy and sad images for model training and keep then in separate folders.
+3. we convert those images into a dataset called data, remove all those files which don't have extension names like jpeg, jpg, bmp or png.
+4. we also remove images which have size < 9kb
+
+part 2:
+1. next we scale the data by dividing each image by 255 (once converted to dataset, images are stored in the form of numpy arrays). data = data.map(lambda x, y: (x/255, y))
+2. we split the dataset into training, validation and testing data dividing the dataset in the form of batches.
+
+part 3:
+1. next we created the model using sequential, conv2d, maxpooling2d, dense and flatten
+2. we train the model and eva;uate it's performance.
+
+
+
+
+
+info:
+cv2.imread(path) is used to load an image from a path
+cv2.imshow(path) is sued to view an imahe from a path
+
+imghdr.what(path) is used to find the extension name of the file
+
+tf.keras.utils.image_dataset_from_directory(folder_name) generates a tf.data.Dataset from images in the folder
+
+.as_numpy_iterator() is used the randomize the numpy arrays and convert them into dictionaries as batches
+ iterator.next() is used the retrieve the next batch
+
+data.take(train_size) is used to take the specified number of batches.
+data.skip(train_size).take(val_size) is used to skip the batches specified for train_size and take the ones specified.
+
+Sequential model is used to create a layer-wise deep learning model.
+Conv2d(filters, kernel_size, strides=(x,y)) (convolutional 2d) is used to divide the image into layers called feature maps for processsing and classification.
+MaxPooling2d is used to calculate the maximum value in every feature map.
+Flatten() is used to convert feature maps into a single array.
+Dense() is used to get input data from all other neirons of the previous network.
+
+activation.relu takes input x and returns output as max(0, x)
+activation.sigmoid takes a real value as input as outputs a value between 0 and 1.
+
+
+
+* if loss>val_loss model is underfitting, if loss<<val_loss model is overfitting.
